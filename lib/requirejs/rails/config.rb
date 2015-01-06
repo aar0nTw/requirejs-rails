@@ -86,6 +86,8 @@ module Requirejs
         shim
         skipModuleInsertion
         skipPragmas
+        skipDirOptimize
+        keepBuildDir
         uglify
         uglify2
         useStrict
