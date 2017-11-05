@@ -28,7 +28,7 @@ module RequirejsHelper
       end]) \
         if block
 
-      html.concat(content_tag(:script, "", rjs_attributes))
+      html.concat(content_tag(:script, "", rjs_attributes)).concat("\n\n")
 
       unless requirejs.run_config.empty?
         run_config = requirejs.run_config.dup
@@ -61,11 +61,11 @@ module RequirejsHelper
         run_config['baseUrl'] = base_url(name)
 
         html.concat(content_tag(:script) do
-          script = "require.config(#{run_config.to_json});"
+          script = "\nrequire.config(#{run_config.to_json});"
 
           # Pass an array to `require`, since it's a top-level module about to be loaded asynchronously (see
           # `http://requirejs.org/docs/errors.html#notloaded`).
-          script.concat(" require([#{name.dump}]);") \
+          script.concat(" require([#{name.dump}]);\n") \
             if name
 
           script.html_safe
@@ -120,3 +120,4 @@ module RequirejsHelper
     @view_proxy ||= Requirejs::Rails::ViewProxy.new
   end
 end
+
