@@ -14,6 +14,7 @@ module Requirejs
       def initialize(application)
         super
         self.manifest = nil
+        self.js_compressor = nil
 
         self.logical_asset_filter = [/\.js$/, /\.html$/, /\.txt$/]
         self.tmp_dir = application.root + 'tmp'
@@ -85,10 +86,13 @@ module Requirejs
         shim
         skipModuleInsertion
         skipPragmas
+        skipDirOptimize
+        keepBuildDir
         uglify
         uglify2
         useStrict
         wrap
+        wrapShim
       }
       end
 
