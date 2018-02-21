@@ -114,13 +114,12 @@ OS X Homebrew users can use 'brew install node'.
           asset_uri, _ = requirejs.sprockets.resolve! file
           asset = requirejs.sprockets.load asset_uri
           asset_logical_path = asset.logical_path
-          puts "Assets logical_path is #{ asset.logical_path }"
           if requirejs.config.logical_path_patterns.any? { |pattern| pattern.match asset_logical_path }
-            puts "Found logical match: #{asset_logical_path}"
+            #puts "Found logical match: #{asset_logical_path}"
             m = ::Requirejs::Rails::Config::BOWER_PATH_PATTERN.match(asset_logical_path)
             if !m
               target_file = requirejs.config.source_dir.join(asset_logical_path)
-              puts "Copying js file #{target_file}"
+              #puts "Copying js file #{target_file}"
               asset.write_to(target_file)
             else
               raise "Not supported yet"
